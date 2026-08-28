@@ -1,0 +1,38 @@
+.github/workflows/build-apk.ymlname: Gerar APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Preparar projeto
+        run: |
+          unzip -o AcerteOTempo-Android-Projeto.zip
+          cd AcerteOTempo-Android
+          echo "Projeto preparado"
+
+      - name: Instalar Gradle
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.10.2-bin.zip
+          unzip -q gradle-8.10.2-bin.zip
+          echo "$PWD/gradle-8.10.2/bin" >> $GITHUB_PATH
+
+      - name: Gerar APK
+        run: |
+          cd AcerteOTempo-Android
+          gradle assembleDebug
+
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Acerte-o-Tempo-APK
+          path: AcerteOTempo-Android/app/build/outputs/apk/debug/app-debug.apk
