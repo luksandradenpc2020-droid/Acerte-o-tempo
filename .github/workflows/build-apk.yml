@@ -1,4 +1,4 @@
-.github/workflows/build-apk.ymlname: Gerar APK
+name: Gerar APK
 
 on:
   workflow_dispatch:
@@ -18,7 +18,12 @@ jobs:
         run: |
           unzip -o AcerteOTempo-Android-Projeto.zip
           cd AcerteOTempo-Android
-          echo "Projeto preparado"
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
       - name: Instalar Gradle
         run: |
