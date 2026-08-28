@@ -15,9 +15,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Preparar projeto
-        run: |
-          unzip -o AcerteOTempo-Android-Projeto.zip
-          cd AcerteOTempo-Android
+     run: |
+    unzip -o AcertoOTempo-Android-Projeto.zip
+    chmod +x gradlew
+      
+    
+
 
       - name: Configurar Java
         uses: actions/setup-java@v4
