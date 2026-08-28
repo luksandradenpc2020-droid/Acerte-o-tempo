@@ -13,11 +13,12 @@ jobs:
     steps:
       - name: Baixar projeto
         uses: actions/checkout@v4
-
-      - name: Preparar projeto
-     run: |
+        - name: Preparar projeto
+          run: |
     unzip -o AcertoOTempo-Android-Projeto.zip
     chmod +x gradlew
+        
+
       
     
 
@@ -27,9 +28,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Instalar Gradle
-        run: |
+      - name: Instalar Gradle        run: |
           wget -q https://services.gradle.org/distributions/gradle-8.10.2-bin.zip
           unzip -q gradle-8.10.2-bin.zip
           echo "$PWD/gradle-8.10.2/bin" >> $GITHUB_PATH
